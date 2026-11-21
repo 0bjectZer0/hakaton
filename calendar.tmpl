@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Расписание КНиИТ</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f4ef;color:#172e32;font:15px/1.45 "Segoe UI",sans-serif}
+header{background:#153d40;color:white;padding:24px clamp(16px,4vw,64px)}h1{font:500 clamp(30px,4vw,50px)/1.1 Georgia,serif;margin:0 0 6px}header small{color:#bbdad3}
+main{max-width:1800px;margin:auto;padding:20px clamp(12px,3vw,48px)}nav,details,.panel{border:1px solid #c9d2ce;background:white;border-radius:10px;padding:14px;margin-bottom:12px}
+nav{display:flex;gap:10px 18px;align-items:center;flex-wrap:wrap}nav[hidden]{display:none}nav label{display:grid;gap:3px;font-size:13px;font-weight:600;color:#38544f}
+select{font:400 15px "Segoe UI",sans-serif;padding:6px 9px;border:1px solid #a8bab3;border-radius:5px;background:white;color:#172e32}summary,select,label:has(input){cursor:pointer}
+.week-switch{display:inline-flex;gap:2px;margin:2px 0 14px;padding:3px;background:#e3ebe6;border:0;border-radius:7px}
+.week-switch input,.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.week-switch span{display:block;border-radius:5px;padding:6px 15px;color:#314a44}.week-switch input:checked+span{background:#205a53;color:white}
+.week-switch input:focus-visible+span{outline:3px solid #a95c12;outline-offset:2px}
+main:has(#numerator:checked) #staticView [data-parity="1"],main:has(#denominator:checked) #staticView [data-parity="0"]{display:none}
+h2{font:500 25px Georgia,serif;margin:20px 0 10px}h3{margin:14px 0 4px}p{margin:5px 0}.scroll{overflow:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{border:1px solid #dce2df;vertical-align:top;text-align:left;padding:6px}th{background:#e8eeea;font-weight:600}th small{display:block;font-weight:400}
+.grid{min-width:1230px;table-layout:fixed}.grid th:first-child{width:52px}
+[data-kind]{--lesson-bg:#edf0ee;--lesson-ink:#394943;background:var(--lesson-bg)}
+[data-kind="Лекция"]{--lesson-bg:#d6efe4;--lesson-ink:#185a42}
+[data-kind="Практика"]{--lesson-bg:#dce6fb;--lesson-ink:#334f8a}
+[data-kind="Лабораторная"]{--lesson-bg:#ceebf2;--lesson-ink:#19556a}
+.grid td[data-kind]{padding:0}.card{padding:8px;overflow-wrap:anywhere}.card+.card{border-top:2px solid white}
+.card-head{display:flex;align-items:baseline;justify-content:space-between;gap:4px;margin-bottom:6px;font-size:12px;color:var(--lesson-ink)}
+.card-head strong,.card-head span{white-space:nowrap}.card-head span{font-weight:600;text-align:right}
+.card b,.card small{display:block}:where(.card) small,.muted{color:#405552}.notice{color:#754016}.load td{font-variant-numeric:tabular-nums}.panel{padding:10px}
+.card .subject{font-size:15px;font-weight:700}
+.room,.subgroup{font-size:13px;font-weight:600;color:#354d55;font-variant-numeric:tabular-nums}
+</style>
+<header><h1>Расписание КНиИТ</h1><small>Саратовский государственный университет</small></header>
+<main><nav id="filters" hidden>
+<label>Направление <select id="program"></select></label><label>Группа <select id="group"></select></label>
+<label>Вариант <select id="variant"></select></label>
+<label>Вид <select id="view"><option value="calendar">Календарь</option><option value="list">Список по дням</option><option value="load">Нагрузка группы</option></select></label></nav>
+<fieldset class="week-switch" id="week"><legend class="sr-only">Неделя</legend>
+<label><input type="radio" id="numerator" name="week" value="0" checked><span>Числитель</span></label>
+<label><input type="radio" id="denominator" name="week" value="1"><span>Знаменатель</span></label></fieldset>
+<div id="staticView">__STATIC_VIEW__</div>
+<div id="output"></div></main>
+<script id="data" type="application/json">__CALENDAR_DATA__</script>
+<script>
+"use strict";
+const data=JSON.parse(document.getElementById("data").textContent);
+const $=id=>document.getElementById(id);
+const days=["Понедельник","Вторник","Среда","Четверг","Пятница","Суббота","Воскресенье"];
+const profiles={comfort:"Комфорт студентов",compact:"Компактность",balance:"Баланс",compromise:"Компромисс"};
+function element(tag,parent,text,cls){
+  const node=document.createElement(tag);
+  if(text!==undefined) node.textContent=text;
+  if(cls) node.className=cls;
+  parent.append(node);return node;
+}
+function clock(n){return String(Math.floor(n/60)).padStart(2,"0")+":"+String(n%60).padStart(2,"0");}
+data.variants.forEach((v,i)=>$("variant").add(new Option((i+1)+" · "+profiles[v.profile],i)));
+$("program").add(new Option("Все направления",""));
+for(const p of [...new Set(data.programs)].sort()) $("program").add(new Option(p,p));
+function updateGroups(){
+  const group=$("group"), previous=group.value;
+  group.replaceChildren();
+  data.groupLabels.forEach((label,i)=>{
+    if(!$("program").value || data.programs[i]===$("program").value) group.add(new Option(label,i));
+  });
+  if([...group.options].some(option=>option.value===previous)) group.value=previous;
+}
+function card(parent,e){
+  const l=data.lessons[e.id], box=element("article",parent,undefined,"card");
+  box.dataset.kind=l.type;
+  const head=element("div",box,undefined,"card-head");
+  element("strong",head,clock(e.start)+"–"+clock(e.end));element("span",head,l.type);
+  element("b",box,l.subject,"subject");
+  if(l.subgroup) element("small",box,l.subgroup,"subgroup");
+  if(l.note) element("small",box,l.note);
+  element("small",box,l.teacher);element("small",box,e.room,"room");
+  if(l.groups.length>1) element("small",box,"Группы: "+l.groups.map(i=>data.groupLabels[i]).join(", "));
+}
+function table(parent,labels,cls){
+  const t=element("table",element("div",parent,undefined,"scroll"),undefined,cls);
+  const head=t.createTHead().insertRow();
+  for(const label of labels) element("th",head,label);
+  return t.createTBody();
+}
+function weekView(parent,events,group){
+  const panel=element("div",parent,undefined,"panel");
+  const byDay=days.map((_,d)=>events.filter(e=>e.day===d));
+  if($("view").value==="list"){
+    byDay.forEach((items,d)=>{
+      element("h3",panel,days[d]);if(!items.length) element("p",panel,"В этот день пар нету","muted");
+      items.forEach(e=>card(panel,e));
+    });
+  }else if($("view").value==="load"){
+    const body=table(panel,["Группа",...days,"Всего пар"],"load");
+    const row=body.insertRow();element("th",row,data.groupLabels[group]);
+    let total=0;
+    for(const items of byDay){
+      const n=new Set(items.map(e=>e.slot)).size;
+      element("td",row,n);total+=n;
+    }
+    element("th",row,total);
+  }else{
+    const body=table(panel,["Пара",...days],"grid");
+    const max=Math.max(0,...events.map(e=>e.slot));
+    for(let slot=0;slot<=max;slot++){
+      const row=body.insertRow();element("th",row,slot+1);
+      byDay.forEach(items=>{
+        const cell=element("td",row);
+        if(!items.length && slot===0) element("small",cell,"В этот день пар нету","muted");
+        const atSlot=items.filter(e=>e.slot===slot);
+        if(atSlot.length) cell.dataset.kind=data.lessons[atSlot[atSlot.length-1].id].type;
+        atSlot.forEach(e=>card(cell,e));
+      });
+    }
+  }
+}
+function render(){
+  const out=$("output");out.replaceChildren();
+  if($("group").selectedIndex<0){element("p",out,"Нет групп для этого направления.");return;}
+  const group=Number($("group").value);
+  const v=data.variants[Number($("variant").value)];
+  const parity=Number(document.querySelector('input[name="week"]:checked').value);
+  const matches=id=>data.lessons[id].groups.includes(group)&&data.lessons[id].weeks.includes(parity);
+  const missing=v.missing.filter(matches);
+  if(missing.length){
+    const detail=element("details",out);
+    element("summary",detail,"Неразмещённые занятия · "+missing.length,"notice");
+    for(const id of missing){
+      const l=data.lessons[id], row=element("p",detail,l.subject+" · "+l.type);
+      if(l.subgroup){
+        row.append(" · ");
+        element("span",row,l.subgroup,"subgroup");
+      }
+      if(l.note) row.append(" · "+l.note);
+      row.append(" · "+l.teacher);
+    }
+  }
+  const events=v.events.filter(e=>matches(e.id)).sort((a,b)=>a.start-b.start||a.id.localeCompare(b.id));
+  weekView(out,events,group);
+}
+$("program").onchange=()=>{updateGroups();render();};
+for(const id of ["group","variant","week","view"]) $(id).onchange=render;
+updateGroups();render();
+$("filters").hidden=false;
+$("staticView").remove();
+</script></html>

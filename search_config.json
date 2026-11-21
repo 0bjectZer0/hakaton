@@ -1,0 +1,8 @@
+{
+  "variants": 4,
+  "attempts": 2,
+  "max_iterations": 1000,
+  "time_limit": 120.0,
+  "randomness": 0.25,
+  "adaptive": false
+}

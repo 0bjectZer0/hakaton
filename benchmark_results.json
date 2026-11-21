@@ -1,0 +1,570 @@
+{
+  "dataset_sha256": "2a87d7f9ea7642f2dce783a62062ff472a5b9cab65be961dd414ae0e8859deea",
+  "dataset": "examples",
+  "size": {
+    "groups": 3,
+    "teachers": 6,
+    "rooms": 5,
+    "lessons": 19
+  },
+  "config": {
+    "max_iterations": 450,
+    "time_limit": 20,
+    "attempts": 3,
+    "randomness": 0.45,
+    "variants": 1
+  },
+  "seeds": [
+    41,
+    42,
+    43,
+    44,
+    45
+  ],
+  "score_definition": "Сумма штрафов с одинаковыми компромиссными весами. Меньше — лучше. Лучший, средний и худший баллы считаются только для полных допустимых решений.",
+  "hard_definition": "Конфликты размещённых занятий проверены отдельно от числа неразмещённых заданий.",
+  "summary": {
+    "fixed": {
+      "runs": 5,
+      "complete_runs": 5,
+      "complete_penalty": {
+        "best": 343.8,
+        "mean": 344.6,
+        "worst": 346.8
+      },
+      "mean_runtime_seconds": 0.04828096008859575,
+      "hard_conflicts_total": 0,
+      "unscheduled_total": 0,
+      "metrics_all_runs": {
+        "gaps": {
+          "min": 0,
+          "mean": 0,
+          "max": 0
+        },
+        "overloaded": {
+          "min": 0,
+          "mean": 0,
+          "max": 0
+        },
+        "single": {
+          "min": 0,
+          "mean": 0,
+          "max": 0
+        },
+        "active": {
+          "min": 15,
+          "mean": 16.2,
+          "max": 17
+        },
+        "imbalance": {
+          "min": 40.8,
+          "mean": 45.599999999999994,
+          "max": 52.8
+        },
+        "empty": {
+          "min": 13,
+          "mean": 13.8,
+          "max": 15
+        },
+        "teacher_gaps": {
+          "min": 0,
+          "mean": 0.4,
+          "max": 2
+        },
+        "teacher_overloaded": {
+          "min": 0,
+          "mean": 0,
+          "max": 0
+        },
+        "teacher_single": {
+          "min": 2,
+          "mean": 5.6,
+          "max": 7
+        },
+        "teacher_active": {
+          "min": 15,
+          "mean": 18,
+          "max": 19
+        },
+        "teacher_imbalance": {
+          "min": 65.2,
+          "mean": 67.60000000000001,
+          "max": 75.2
+        },
+        "teacher_empty": {
+          "min": 41,
+          "mean": 42,
+          "max": 45
+        }
+      }
+    },
+    "adaptive": {
+      "runs": 5,
+      "complete_runs": 5,
+      "complete_penalty": {
+        "best": 343.8,
+        "mean": 345.2,
+        "worst": 349.8
+      },
+      "mean_runtime_seconds": 0.0521175800357014,
+      "hard_conflicts_total": 0,
+      "unscheduled_total": 0,
+      "metrics_all_runs": {
+        "gaps": {
+          "min": 0,
+          "mean": 0,
+          "max": 0
+        },
+        "overloaded": {
+          "min": 0,
+          "mean": 0,
+          "max": 0
+        },
+        "single": {
+          "min": 0,
+          "mean": 0,
+          "max": 0
+        },
+        "active": {
+          "min": 15,
+          "mean": 16.2,
+          "max": 17
+        },
+        "imbalance": {
+          "min": 40.8,
+          "mean": 45.599999999999994,
+          "max": 52.8
+        },
+        "empty": {
+          "min": 13,
+          "mean": 13.8,
+          "max": 15
+        },
+        "teacher_gaps": {
+          "min": 0,
+          "mean": 0.4,
+          "max": 2
+        },
+        "teacher_overloaded": {
+          "min": 0,
+          "mean": 0,
+          "max": 0
+        },
+        "teacher_single": {
+          "min": 2,
+          "mean": 5.6,
+          "max": 7
+        },
+        "teacher_active": {
+          "min": 15,
+          "mean": 17.8,
+          "max": 19
+        },
+        "teacher_imbalance": {
+          "min": 65.2,
+          "mean": 68.8,
+          "max": 75.2
+        },
+        "teacher_empty": {
+          "min": 41,
+          "mean": 42.2,
+          "max": 45
+        }
+      }
+    }
+  },
+  "matched_complete_pairs": 5,
+  "paired_adaptive_minus_fixed": [
+    3.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "runs": {
+    "fixed": [
+      {
+        "seed": 41,
+        "profile": "comfort",
+        "runtime_seconds": 0.04791540000587702,
+        "hard_conflicts": 0,
+        "unscheduled": 0,
+        "valid_complete": true,
+        "common_penalty": 346.8,
+        "metrics": {
+          "gaps": 0,
+          "overloaded": 0,
+          "single": 0,
+          "active": 15,
+          "imbalance": 52.8,
+          "empty": 15,
+          "teacher_gaps": 0,
+          "teacher_overloaded": 0,
+          "teacher_single": 5,
+          "teacher_active": 18,
+          "teacher_imbalance": 67.2,
+          "teacher_empty": 42
+        },
+        "iterations": 209,
+        "attempts": 3,
+        "timed_out": false,
+        "final_weights": {
+          "gaps": 12,
+          "overloaded": 18,
+          "single": 12,
+          "active": 2,
+          "imbalance": 1.0,
+          "teacher_gaps": 2,
+          "teacher_overloaded": 3,
+          "teacher_single": 2,
+          "teacher_active": 1,
+          "teacher_imbalance": 0.35
+        }
+      },
+      {
+        "seed": 42,
+        "profile": "comfort",
+        "runtime_seconds": 0.05030850018374622,
+        "hard_conflicts": 0,
+        "unscheduled": 0,
+        "valid_complete": true,
+        "common_penalty": 344.8,
+        "metrics": {
+          "gaps": 0,
+          "overloaded": 0,
+          "single": 0,
+          "active": 15,
+          "imbalance": 52.8,
+          "empty": 15,
+          "teacher_gaps": 2,
+          "teacher_overloaded": 0,
+          "teacher_single": 2,
+          "teacher_active": 15,
+          "teacher_imbalance": 75.2,
+          "teacher_empty": 45
+        },
+        "iterations": 228,
+        "attempts": 3,
+        "timed_out": false,
+        "final_weights": {
+          "gaps": 12,
+          "overloaded": 18,
+          "single": 12,
+          "active": 2,
+          "imbalance": 1.0,
+          "teacher_gaps": 2,
+          "teacher_overloaded": 3,
+          "teacher_single": 2,
+          "teacher_active": 1,
+          "teacher_imbalance": 0.35
+        }
+      },
+      {
+        "seed": 43,
+        "profile": "comfort",
+        "runtime_seconds": 0.05771440011449158,
+        "hard_conflicts": 0,
+        "unscheduled": 0,
+        "valid_complete": true,
+        "common_penalty": 343.8,
+        "metrics": {
+          "gaps": 0,
+          "overloaded": 0,
+          "single": 0,
+          "active": 17,
+          "imbalance": 40.8,
+          "empty": 13,
+          "teacher_gaps": 0,
+          "teacher_overloaded": 0,
+          "teacher_single": 7,
+          "teacher_active": 19,
+          "teacher_imbalance": 65.2,
+          "teacher_empty": 41
+        },
+        "iterations": 228,
+        "attempts": 3,
+        "timed_out": false,
+        "final_weights": {
+          "gaps": 12,
+          "overloaded": 18,
+          "single": 12,
+          "active": 2,
+          "imbalance": 1.0,
+          "teacher_gaps": 2,
+          "teacher_overloaded": 3,
+          "teacher_single": 2,
+          "teacher_active": 1,
+          "teacher_imbalance": 0.35
+        }
+      },
+      {
+        "seed": 44,
+        "profile": "comfort",
+        "runtime_seconds": 0.043100500013679266,
+        "hard_conflicts": 0,
+        "unscheduled": 0,
+        "valid_complete": true,
+        "common_penalty": 343.8,
+        "metrics": {
+          "gaps": 0,
+          "overloaded": 0,
+          "single": 0,
+          "active": 17,
+          "imbalance": 40.8,
+          "empty": 13,
+          "teacher_gaps": 0,
+          "teacher_overloaded": 0,
+          "teacher_single": 7,
+          "teacher_active": 19,
+          "teacher_imbalance": 65.2,
+          "teacher_empty": 41
+        },
+        "iterations": 190,
+        "attempts": 3,
+        "timed_out": false,
+        "final_weights": {
+          "gaps": 12,
+          "overloaded": 18,
+          "single": 12,
+          "active": 2,
+          "imbalance": 1.0,
+          "teacher_gaps": 2,
+          "teacher_overloaded": 3,
+          "teacher_single": 2,
+          "teacher_active": 1,
+          "teacher_imbalance": 0.35
+        }
+      },
+      {
+        "seed": 45,
+        "profile": "comfort",
+        "runtime_seconds": 0.042366000125184655,
+        "hard_conflicts": 0,
+        "unscheduled": 0,
+        "valid_complete": true,
+        "common_penalty": 343.8,
+        "metrics": {
+          "gaps": 0,
+          "overloaded": 0,
+          "single": 0,
+          "active": 17,
+          "imbalance": 40.8,
+          "empty": 13,
+          "teacher_gaps": 0,
+          "teacher_overloaded": 0,
+          "teacher_single": 7,
+          "teacher_active": 19,
+          "teacher_imbalance": 65.2,
+          "teacher_empty": 41
+        },
+        "iterations": 171,
+        "attempts": 3,
+        "timed_out": false,
+        "final_weights": {
+          "gaps": 12,
+          "overloaded": 18,
+          "single": 12,
+          "active": 2,
+          "imbalance": 1.0,
+          "teacher_gaps": 2,
+          "teacher_overloaded": 3,
+          "teacher_single": 2,
+          "teacher_active": 1,
+          "teacher_imbalance": 0.35
+        }
+      }
+    ],
+    "adaptive": [
+      {
+        "seed": 41,
+        "profile": "comfort",
+        "runtime_seconds": 0.047170700039714575,
+        "hard_conflicts": 0,
+        "unscheduled": 0,
+        "valid_complete": true,
+        "common_penalty": 349.8,
+        "metrics": {
+          "gaps": 0,
+          "overloaded": 0,
+          "single": 0,
+          "active": 15,
+          "imbalance": 52.8,
+          "empty": 15,
+          "teacher_gaps": 0,
+          "teacher_overloaded": 0,
+          "teacher_single": 5,
+          "teacher_active": 17,
+          "teacher_imbalance": 73.2,
+          "teacher_empty": 43
+        },
+        "iterations": 209,
+        "attempts": 3,
+        "timed_out": false,
+        "final_weights": {
+          "gaps": 14.276839915321233,
+          "overloaded": 18.0,
+          "single": 12.0,
+          "active": 2.758946638440411,
+          "imbalance": 1.6,
+          "teacher_gaps": 2.3794733192202053,
+          "teacher_overloaded": 3.0,
+          "teacher_single": 2.2190890230020663,
+          "teacher_active": 1.3,
+          "teacher_imbalance": 0.5599999999999999
+        }
+      },
+      {
+        "seed": 42,
+        "profile": "comfort",
+        "runtime_seconds": 0.05394520005211234,
+        "hard_conflicts": 0,
+        "unscheduled": 0,
+        "valid_complete": true,
+        "common_penalty": 344.8,
+        "metrics": {
+          "gaps": 0,
+          "overloaded": 0,
+          "single": 0,
+          "active": 15,
+          "imbalance": 52.8,
+          "empty": 15,
+          "teacher_gaps": 2,
+          "teacher_overloaded": 0,
+          "teacher_single": 2,
+          "teacher_active": 15,
+          "teacher_imbalance": 75.2,
+          "teacher_empty": 45
+        },
+        "iterations": 228,
+        "attempts": 3,
+        "timed_out": false,
+        "final_weights": {
+          "gaps": 13.859032006179559,
+          "overloaded": 18.0,
+          "single": 12.0,
+          "active": 2.758946638440411,
+          "imbalance": 1.6,
+          "teacher_gaps": 2.309838667696593,
+          "teacher_overloaded": 3.0,
+          "teacher_single": 2.409878030638384,
+          "teacher_active": 1.3464101615137753,
+          "teacher_imbalance": 0.5514249239791342
+        }
+      },
+      {
+        "seed": 43,
+        "profile": "comfort",
+        "runtime_seconds": 0.060271200025454164,
+        "hard_conflicts": 0,
+        "unscheduled": 0,
+        "valid_complete": true,
+        "common_penalty": 343.8,
+        "metrics": {
+          "gaps": 0,
+          "overloaded": 0,
+          "single": 0,
+          "active": 17,
+          "imbalance": 40.8,
+          "empty": 13,
+          "teacher_gaps": 0,
+          "teacher_overloaded": 0,
+          "teacher_single": 7,
+          "teacher_active": 19,
+          "teacher_imbalance": 65.2,
+          "teacher_empty": 41
+        },
+        "iterations": 228,
+        "attempts": 3,
+        "timed_out": false,
+        "final_weights": {
+          "gaps": 12.0,
+          "overloaded": 18.0,
+          "single": 12.0,
+          "active": 2.8197560612767676,
+          "imbalance": 1.6,
+          "teacher_gaps": 2.1549193338482966,
+          "teacher_overloaded": 3.0,
+          "teacher_single": 2.409878030638384,
+          "teacher_active": 1.3376388603226825,
+          "teacher_imbalance": 0.5599999999999999
+        }
+      },
+      {
+        "seed": 44,
+        "profile": "comfort",
+        "runtime_seconds": 0.058931299950927496,
+        "hard_conflicts": 0,
+        "unscheduled": 0,
+        "valid_complete": true,
+        "common_penalty": 343.8,
+        "metrics": {
+          "gaps": 0,
+          "overloaded": 0,
+          "single": 0,
+          "active": 17,
+          "imbalance": 40.8,
+          "empty": 13,
+          "teacher_gaps": 0,
+          "teacher_overloaded": 0,
+          "teacher_single": 7,
+          "teacher_active": 19,
+          "teacher_imbalance": 65.2,
+          "teacher_empty": 41
+        },
+        "iterations": 190,
+        "attempts": 3,
+        "timed_out": false,
+        "final_weights": {
+          "gaps": 12.0,
+          "overloaded": 18.0,
+          "single": 12.0,
+          "active": 2.8197560612767676,
+          "imbalance": 1.6,
+          "teacher_gaps": 2.1549193338482966,
+          "teacher_overloaded": 3.0,
+          "teacher_single": 2.409878030638384,
+          "teacher_active": 1.3376388603226825,
+          "teacher_imbalance": 0.5599999999999999
+        }
+      },
+      {
+        "seed": 45,
+        "profile": "comfort",
+        "runtime_seconds": 0.040269500110298395,
+        "hard_conflicts": 0,
+        "unscheduled": 0,
+        "valid_complete": true,
+        "common_penalty": 343.8,
+        "metrics": {
+          "gaps": 0,
+          "overloaded": 0,
+          "single": 0,
+          "active": 17,
+          "imbalance": 40.8,
+          "empty": 13,
+          "teacher_gaps": 0,
+          "teacher_overloaded": 0,
+          "teacher_single": 7,
+          "teacher_active": 19,
+          "teacher_imbalance": 65.2,
+          "teacher_empty": 41
+        },
+        "iterations": 171,
+        "attempts": 3,
+        "timed_out": false,
+        "final_weights": {
+          "gaps": 12.0,
+          "overloaded": 18.0,
+          "single": 12.0,
+          "active": 2.8197560612767676,
+          "imbalance": 1.6,
+          "teacher_gaps": 2.1549193338482966,
+          "teacher_overloaded": 3.0,
+          "teacher_single": 2.409878030638384,
+          "teacher_active": 1.3376388603226825,
+          "teacher_imbalance": 0.5599999999999999
+        }
+      }
+    ]
+  }
+}
